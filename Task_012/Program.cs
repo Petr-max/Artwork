@@ -14,10 +14,15 @@ Console.WriteLine("Введите второе число: ");
 int num2 = Convert.ToInt32(Console.ReadLine());
 
 int remains = Remains(num1, num2);
+
+Console.WriteLine($"{num1} деление {num2} , остаток {num1 % num2} ");
+
+Console.WriteLine($"Кратно-> {remains == 0}");
+
 int Remains(int number1, int number2)
 {
-  return number1 % number2;
+  return num1 % num2;
 }
-Console.WriteLine($"{num1} поделить {num2} , остаток {num1 % num2}  ");
-// ConsolWrite($"Кратно: {remains == 0} ");
+
+
 
