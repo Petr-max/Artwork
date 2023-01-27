@@ -19,4 +19,5 @@ int Remains(int number1, int number2)
   return number1 % number2;
 }
 Console.WriteLine($"{num1} поделить {num2} , остаток {num1 % num2}  ");
-Console.Write($"Кратно: {remains == 0} ");
+// ConsolWrite($"Кратно: {remains == 0} ");
+
