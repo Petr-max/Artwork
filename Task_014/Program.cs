@@ -11,10 +11,11 @@ Console.WriteLine("Введите число: ");
 int number1 = Convert.ToInt32(Console.ReadLine());
 
 bool mult = Mult(number1);
+Console.WriteLine(mult ? "Да" : "Нет" );
 bool Mult(int num1)
 {
   return num1 % 7 == 0 && num1 % 23 == 0;
 }
-Console.WriteLine(mult ? "Да" : "Нет" );
+
 
 
