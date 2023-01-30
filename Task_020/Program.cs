@@ -16,18 +16,18 @@ int x2 = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите координаты точки ");
 int y2 = Convert.ToInt32(Console.ReadLine());
 
-double Distance(int xa, int ya, int xb, int yb)
+double Dist(int xa, int ya, int xb, int yb)
 
 {
   int cat1 = xa - xb;
   int cat2 = ya - yb;
-  double result = Math.Sqrt(cat1 * cat2 + cat2 * cat2);
+  double result = Math.Sqrt(cat1 * cat1 + cat2 * cat2);
   return result;
 }
 
-double distanse = Distanse(x1, y1, x2, y2);
-double dRound = Math.Round(distanse, 2, MidpointRounding.ToZero);
-Console.Write($"A ({x1} {y1}); B ({x2} {y2}) -> {dRound}");
+double dist = Dist(x1, y1, x2, y2);
+double dRound = Math.Round(dist, 2, MidpointRounding.ToZero);
+Console.Write($"A ({x1} {y1}) B ({x2} {y2}) -> {dRound}");
 
 // double range = Distanse(a, a1, b, b1);
 // Console.WriteLine(Math.Round(range, 2, MidpointRounding.ToZero));
