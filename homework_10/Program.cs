@@ -17,5 +17,3 @@ Console.WriteLine($"{res} ");
 
 
 
-
-
