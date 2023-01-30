@@ -4,9 +4,9 @@
 // возможных координат точек 
 // в этой четверти (x и y).
 
-Cnsole.Write("Введите номер четверти: ");
+Console.Write("Введите номер четверти: ");
 
-string quarter = Console.ReadLine();
+string quarter = Console.ReadLine()!;
 
 string result = RangeCoordinates(quarter);
 
