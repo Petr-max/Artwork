@@ -21,11 +21,3 @@ int MaxDigit(int num) // num = number
   return result;
 }
 Console.WriteLine($"Наибольшая цифра числа -> {maxDigit}");
-  int firstDigit = num / 10; // 7
-  int secondDigit = num % 10; // 8 
-  int result = firstDigit > secondDigit ? firstDigit : secondDigit;
-  return result;
-}
-
-// int maxDigit3 = MaxDigit(26);
-// Console.WriteLine($"Наибольшая цифра числа -> {maxDigit3}");
