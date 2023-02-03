@@ -16,8 +16,8 @@ Console.WriteLine($"{number} -> {countNumber}");
 
 int CountNumber(int num)
 {
-  if (num < 0) num = num * -1;
-  int count = 1; // = 0;
+  if (num < 0) num = num * -1; // включая отрицательное число
+  int count = 1; // = 0; включая ноль поставить 1 и 9
   while (num > 9) // > 0)
   {
     num = num / 10;
