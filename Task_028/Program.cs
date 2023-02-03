@@ -11,7 +11,11 @@ int Factorial(int num)
   int productnum = 1;
   for (int i = 1; i <= num; i++)
   {
-    productnum = productnum * i;
+    checked // проверка на ошибки
+    {
+      productnum = productnum * i;
+    }
+
   }
   return productnum;
 }
