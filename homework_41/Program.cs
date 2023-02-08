@@ -7,7 +7,7 @@
 -1, -7, 567, 89, 223-> 3 */
 
 Console.WriteLine("Введите числа через запятую ");
-string input = Console.ReadLine();
+string input = Console.ReadLine()!;
 int result = 0;
 
 int[] numbers = ParseStringToArray(input);

@@ -11,24 +11,22 @@
 // 23432 -> да
 
 Console.WriteLine("Enter five numbers: ");
-Console.ReadLine();
-int x = 123;
-int a1 = x % 10;
-int a2 = x / 10 % 10;
-int a3 = x / 100 % 10;
+string numeral = Console.ReadLine()!;
+int len = numeral.Length;
 
-x = a1 * 100 + a2 * 10 + a3;
-
-if (x == 3)
+if (len == 5)
 {
-  Console.WriteLine($"{x} -> YES");
+  if (numeral[0] == numeral[4] && numeral[1] == numeral[3])
+  {
+    Console.WriteLine($"{numeral} -> YES");
+  }
+  else
+  {
+    Console.WriteLine($"{numeral} -> NO");
+  }
 }
 else
-
-  Console.WriteLine($"{x} -> NO");
-
-
-else
-
-  Console.WriteLine($"{x} -> Sorry, misentry:(( ");
+{
+  Console.WriteLine($"{numeral} -> Sorry, misentry:(( ");
+}
 
