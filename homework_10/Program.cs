@@ -1,4 +1,5 @@
 // Задача 10:
+
 // Напишите программу, которая принимает 
 // на вход трехзначное число и на выходе 
 // показывае вторую цифру этого числа.
@@ -8,11 +9,12 @@
 // 918-> 1
 
 Console.WriteLine("Введите трехзначное число: ");
+
 int num = Convert.ToInt32(Console.ReadLine());
 
 int res = num / 10 % 10;
- 
-Console.WriteLine($"{res} ");
+
+ Console.WriteLine($"{res} ");
 
 
 
