@@ -1,95 +1,103 @@
-﻿
+﻿// Задача 59: 
+
+// Задайтедвумерный массив из целых чисел.
+// Напишите программу, которая удалит строку и столбец, на
+// пересечении которых расположен наименьший элемент массива.
+
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// 5 2 6 7
+// Наименьший элемент - 1, на выходе получим
+// следующий массив:
+// 9 2 3
+// 4 2 4
+// 2 6 7
 
 void IncorrectValue()
 {
-    Console.WriteLine("Введено некорректное значение.");
-    Environment.Exit(0);
+  Console.WriteLine("Введено некорректное значение.");
+  Environment.Exit(0);
 }
-
 int UserInput()
 {
-    if (!int.TryParse(Console.ReadLine(), out int temp)) IncorrectValue();
-    return temp;
+  if (!int.TryParse(Console.ReadLine(), out int temp)) IncorrectValue();
+  return temp;
 }
-
 int[,] MatrixCreate(int rows, int columns, int min, int max)
 {
-    int[,] array = new int[rows, columns];
-    Random rnd = new Random();
-    for (int i = 0; i < rows; i++)
+  int[,] array = new int[rows, columns];
+  Random rnd = new Random();
+  for (int i = 0; i < rows; i++)
+  {
+    for (int j = 0; j < columns; j++)
     {
-        for (int j = 0; j < columns; j++)
-        {
-            array[i, j] = rnd.Next(min, max + 1);
-        }
+      array[i, j] = rnd.Next(min, max + 1);
     }
-    return array;
+  }
+  return array;
 }
-
 void PrintMatrix(int[,] array)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    Console.Write("[");
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-        Console.Write("[");
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            if (j < array.GetLength(1) - 1)
-                Console.Write($"{array[i, j],4} |");
-            else Console.WriteLine($"{array[i, j],4}]");
-        }
+      if (j < array.GetLength(1) - 1)
+        Console.Write($"{array[i, j],4} |");
+      else Console.WriteLine($"{array[i, j],4}]");
     }
+  }
 }
-
 int[] MatrixMinElemIndex(int[,] array2D)
 {
-    int[] result = new int[2];
-    int min = array2D[0, 0];
-    for (int i = 0; i < array2D.GetLength(0); i++)
+  int[] result = new int[2];
+  int min = array2D[0, 0];
+  for (int i = 0; i < array2D.GetLength(0); i++)
+  {
+    for (int j = 0; j < array2D.GetLength(1); j++)
     {
-        for (int j = 0; j < array2D.GetLength(1); j++)
-        {
-            if (array2D[i, j] < min)
-            {
-                min = array2D[i, j];
-                result[0] = i;
-                result[1] = j;
-            }
-        }
+      if (array2D[i, j] < min)
+      {
+        min = array2D[i, j];
+        result[0] = i;
+        result[1] = j;
+      }
     }
-    return result;
+  }
+  return result;
 }
-
 void PrintArray(int[] array)
 {
-    for (int i = 0; i < array.Length; i++)
-    {
-        if (i < array.Length - 1)
-            Console.Write($"{array[i]}; ");
-        else Console.WriteLine($"{array[i]}.");
-    }
+  for (int i = 0; i < array.Length; i++)
+  {
+    if (i < array.Length - 1)
+      Console.Write($"{array[i]}; ");
+    else Console.WriteLine($"{array[i]}.");
+  }
 }
-
 int[,] DeleteMinRowsColumns(int[,] array2D, int[] array)
 {
-    int rowsCount = array2D.GetLength(0) - 1;
-    int columnsCount = array2D.GetLength(1) - 1;
-    int[,] resultMatrix = new int[rowsCount, columnsCount];
-    int m = 0;
-    for (int i = 0; i < rowsCount; i++)
+  int rowsCount = array2D.GetLength(0) - 1;
+  int columnsCount = array2D.GetLength(1) - 1;
+  int[,] resultMatrix = new int[rowsCount, columnsCount];
+  int m = 0;
+  for (int i = 0; i < rowsCount; i++)
+  {
+    if (m == array[0]) m++;
+    int n = 0;
+    for (int j = 0; j < columnsCount; j++)
     {
-        if (m == array[0]) m++;
-        int n = 0;
-        for (int j = 0; j < columnsCount; j++)
-        {
-            if (n == array[1]) n++;
-            resultMatrix[i, j] = array2D[m, n];
-            n++;
-        }
-        m++;
+      if (n == array[1]) n++;
+      resultMatrix[i, j] = array2D[m, n];
+      n++;
     }
-    return resultMatrix;
+    m++;
+  }
+  return resultMatrix;
 }
-
 Console.Write("Введите кол-во строк в массиве: ");
 int rowsSize = UserInput();
 if (rowsSize <= 0) IncorrectValue();
