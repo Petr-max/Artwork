@@ -1,4 +1,5 @@
-﻿/*Задача 57: 
+﻿/*Задача 57:
+ 
 Составить частотный словарь элементов
 двумерного массива. Частотный словарь содержит
 информацию о том, сколько раз встречается элемент
@@ -9,13 +10,11 @@ void IncorrectValue()
   Console.WriteLine("Введено некорректное значение.");
   Environment.Exit(0);
 }
-
 int UserInput()
 {
   if (!int.TryParse(Console.ReadLine(), out int temp)) IncorrectValue();
   return temp;
 }
-
 int[,] MatrixCreate(int rows, int columns, int min, int max)
 {
   int[,] array = new int[rows, columns];
@@ -29,7 +28,6 @@ int[,] MatrixCreate(int rows, int columns, int min, int max)
   }
   return array;
 }
-
 void PrintMatrix(int[,] array)
 {
   for (int i = 0; i < array.GetLength(0); i++)
@@ -43,7 +41,6 @@ void PrintMatrix(int[,] array)
     }
   }
 }
-
 int[] AllNumbersArray(int[,] array2D)
 {
   int arraySize = array2D.GetLength(0) * array2D.GetLength(1);
@@ -59,7 +56,6 @@ int[] AllNumbersArray(int[,] array2D)
   }
   return array;
 }
-
 void PrintArray(int[] array)
 {
   for (int i = 0; i < array.Length; i++)
@@ -69,7 +65,6 @@ void PrintArray(int[] array)
     else Console.WriteLine($"{array[i]}.");
   }
 }
-
 void FrequencyDictionary(int[] array)
 {
   int count = 1;
@@ -87,7 +82,6 @@ void FrequencyDictionary(int[] array)
   }
   Console.WriteLine($"Число {num} встречается {count}");
 }
-
 Console.Write("Введите кол-во строк в массиве: ");
 int rowsSize = UserInput();
 if (rowsSize <= 0) IncorrectValue();
