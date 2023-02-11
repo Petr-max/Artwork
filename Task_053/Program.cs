@@ -1,4 +1,5 @@
 ﻿/*Задача 53: 
+
 Задайте двумерный массив. Напишите программу,
 которая поменяет местами первую и последнюю строку
 массива.*/
@@ -9,13 +10,11 @@ void IncorrectValue()
   Console.WriteLine("Введено некорректное значение.");
   Environment.Exit(0);
 }
-
 int UserInput()
 {
   if (!int.TryParse(Console.ReadLine(), out int temp)) IncorrectValue();
   return temp;
 }
-
 int[,] MatrixCreate(int rows, int columns, int min, int max)
 {
   int[,] array = new int[rows, columns];
@@ -29,7 +28,6 @@ int[,] MatrixCreate(int rows, int columns, int min, int max)
   }
   return array;
 }
-
 void PrintMatrix(int[,] array)
 {
   for (int i = 0; i < array.GetLength(0); i++)
@@ -43,12 +41,10 @@ void PrintMatrix(int[,] array)
     }
   }
 }
-
 bool MatrixRowsColumnsCheck(int[,] array2D)
 {
   return array2D.GetLength(0) == array2D.GetLength(1);
 }
-
 void InvertedMatrix(int[,] array2D)
 {
   int rowsCount = array2D.GetLength(0);
@@ -63,7 +59,6 @@ void InvertedMatrix(int[,] array2D)
     }
   }
 }
-
 Console.Write("Введите кол-во строк в массиве: ");
 int rowsSize = UserInput();
 if (rowsSize <= 0) IncorrectValue();
