@@ -32,9 +32,9 @@ void PrintMatrix(int[,] matrix) // вывод метода и печать
     Console.Write("[");
     for (int j = 0; j < matrix.GetLength(1); j++) // второй цикл по столбцам j
     {
-      // вместо запятой используем if (j < matrix.GetLength(1) - 1)
-      if (j < matrix.GetLength(1) - 1) Console.Write($"{matrix[i, j],4} | "); // вывод метода i и j с пробелом в 4 строки
-      else Console.Write($"{matrix[i, j],4} | "); // вывод метода i и j с пробелом в 4 строки и " | "
+      if (j < matrix.GetLength(1) - 1) // вместо запятой используем if (j < matrix.GetLength(1) - 1)
+        Console.Write($"{matrix[i, j],4} | "); // вывод метода i и j с пробелом в 4 строки
+      else Console.Write($"{matrix[i, j],4} "); // вывод метода i и j с пробелом в 4 строки и " | "
     }
     Console.WriteLine("]");
   }
