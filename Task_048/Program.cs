@@ -31,8 +31,8 @@ void PrintMatrixArray(int[,] arr)
     for (int j = 0; j < arr.GetLength(1); j++)
     {
       if (j < arr.GetLength(1) - 1)
-        Console.Write($"{arr[i, j],3} |");
-      else Console.Write($"{arr[i, j],3}");
+        Console.Write($"{arr[i, j],3} | ");
+      else Console.Write($"{arr[i, j],3} ");
     }
     Console.WriteLine("]");
   }
