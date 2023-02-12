@@ -11,21 +11,23 @@
 // 8 4 2 4
 // Сумма элементов главной диагонали: 1+9+2 = 12
 
-int[,] createMatrixRndInt = CreateMatrixRndInt(5, 4, 0, 10);
+int[,] createMatrixRndInt = CreateMatrixRndInt(4, 3, 0, 10);
 PrintMatrix(createMatrixRndInt);
-Console.WriteLine(" -> ");
-int result = SummDiagonal(createMatrixRndInt);
-Console.WriteLine(result);
+Console.Write("Сумма элементов главной диагонали: -> ");
+int result = SumDiagonal(createMatrixRndInt);
+Console.Write(result);
 
-int SummDiagonal(int[,] inMass)
+int SumDiagonal(int[,] inMass)
 {
   int res = 0;
-  for (int i = 0; i < inMass.GetLength(0) && i < inMass.GetLength(1); i++)
+  for (int i = 0; i < inMass.GetLength(0) && i < inMass.GetLength(1); i++) // в цикле ставим условие что итерация идет 
+                                                                           // пока i меньше колличеству строк и столбцов
   {
     res += inMass[i, i];
   }
   return res;
 }
+
 int[,] CreateMatrixRndInt(int rows, int columns, int min, int max)
 {
   int[,] matrix = new int[rows, columns]; // 0, 1
@@ -47,8 +49,9 @@ void PrintMatrix(int[,] matrix)
     Console.Write("|");
     for (int j = 0; j < matrix.GetLength(1); j++)
     {
-      if (j < matrix.GetLength(1) - 1) Console.Write($"{matrix[i, j],4} | ");
-      else Console.Write($"{matrix[i, j],4} ");
+      if (j < matrix.GetLength(1) - 1)
+        Console.Write($"{matrix[i, j],3} | ");
+      else Console.Write($"{matrix[i, j],3} ");
     }
     Console.WriteLine("|");
   }
