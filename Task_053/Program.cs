@@ -4,80 +4,47 @@
 которая поменяет местами первую и последнюю строку
 массива.*/
 
-
-void IncorrectValue()
-{
-  Console.WriteLine("Введено некорректное значение.");
-  Environment.Exit(0);
-}
-int UserInput()
-{
-  if (!int.TryParse(Console.ReadLine(), out int temp)) IncorrectValue();
-  return temp;
-}
-int[,] MatrixCreate(int rows, int columns, int min, int max)
-{
-  int[,] array = new int[rows, columns];
-  Random rnd = new Random();
-  for (int i = 0; i < rows; i++)
-  {
-    for (int j = 0; j < columns; j++)
-    {
-      array[i, j] = rnd.Next(min, max + 1);
-    }
-  }
-  return array;
-}
-void PrintMatrix(int[,] array)
-{
-  for (int i = 0; i < array.GetLength(0); i++)
-  {
-    Console.Write("[");
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-      if (j < array.GetLength(1) - 1)
-        Console.Write($"{array[i, j],4} |");
-      else Console.WriteLine($"{array[i, j],4}]");
-    }
-  }
-}
-bool MatrixRowsColumnsCheck(int[,] array2D)
-{
-  return array2D.GetLength(0) == array2D.GetLength(1);
-}
-void InvertedMatrix(int[,] array2D)
-{
-  int rowsCount = array2D.GetLength(0);
-  int columnsCount = array2D.GetLength(1);
-  for (int i = 0; i < rowsCount - 1; i++)
-  {
-    for (int j = i + 1; j < columnsCount; j++)
-    {
-      int temp = array2D[i, j];
-      array2D[i, j] = array2D[j, i];
-      array2D[j, i] = temp;
-    }
-  }
-}
-Console.Write("Введите кол-во строк в массиве: ");
-int rowsSize = UserInput();
-if (rowsSize <= 0) IncorrectValue();
-Console.Write("Введите кол-во столбцов в массиве: ");
-int columnsSize = UserInput();
-if (columnsSize <= 0) IncorrectValue();
-Console.Write("Введите левую границу диапазона чисел: ");
-int minValue = UserInput();
-Console.Write("Введите правую границу диапазона чисел: ");
-int maxValue = UserInput();
-
-int[,] matrix = MatrixCreate(rowsSize, columnsSize, minValue, maxValue);
-Console.WriteLine("Заданный массив:");
+int[,] matrix = CreateMatrixRndInt(4, 5, 0, 255);
+PrintMatrix(matrix);
+Console.WriteLine();
+ReplacemenMatrix(matrix);
 PrintMatrix(matrix);
 
-if (MatrixRowsColumnsCheck(matrix) == true)
+void ReplacemenMatrix(int[,] matrixMassIn)
 {
-  InvertedMatrix(matrix);
-  Console.WriteLine("Новый массив:");
-  PrintMatrix(matrix);
+  int temp;
+  for (int i = 0; i < matrixMassIn.GetLength(1); i++)
+  {
+    temp = matrixMassIn[0, i];
+    matrixMassIn[0, i] = matrixMassIn[matrixMassIn.GetLength(0) - 1, i];
+    matrixMassIn[matrixMassIn.GetLength(0) - 1, i] = temp;
+  }
 }
-else Console.WriteLine("\r\nНевозможно заменить строки на столбцы.");
+void PrintMatrix(int[,] matrix)
+{
+  for (int i = 0; i < matrix.GetLength(0); i++)
+  {
+    Console.Write("|");
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+      if (j < matrix.GetLength(1) - 1)
+        Console.Write($"{matrix[i, j],3} | ");
+      else Console.Write($"{matrix[i, j],3} ");
+    }
+    Console.WriteLine("|");
+  }
+}
+int[,] CreateMatrixRndInt(int rows, int columns, int min, int max)
+{
+  int[,] matrix = new int[rows, columns]; // 0, 1
+  Random rnd = new Random();
+
+  for (int i = 0; i < matrix.GetLength(0); i++)
+  {
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+      matrix[i, j] = rnd.Next(min, max + 1);
+    }
+  }
+  return matrix;
+}
