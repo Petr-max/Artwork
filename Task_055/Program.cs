@@ -4,36 +4,37 @@
 если это невозможно, программа должна вывести 
 сообщение для пользователя.*/
 
-int[,] matrixGenerate = CreateMatrixRndInt(4, 4, 0, 255);
-PrintMatrix(matrixGenerate);
-Console.WriteLine();
+int[,] matrixGenerate = CreateMatrixRndInt(4, 4, 0, 255); // Генерируем массив
+PrintMatrix(matrixGenerate);                              // Распечатываем
+Console.WriteLine();                                      // Печатаем пробел
 
-if (IsSquareMatrix(matrixGenerate))
+if (IsSquareMatrix(matrixGenerate)) // Добавляем проверку которая на вход получает 
+                                    // сгенерированную матрицу (matrixGenerate)
 {
-  PrintMatrix(ReplacementMatrix(matrixGenerate));
-}
-else
-{
+  PrintMatrix(ReplacementMatrix(matrixGenerate)); // если (true) то сразу печать и 
+}                                                 // метод разворота (ReplacementMatrix(matrixGenerate)
+else                                              // иначе 
+{                                                 // Console.WriteLine("Не возможно обработать массив!");
   Console.WriteLine("Не возможно обработать массив!");
 }
 
-bool IsSquareMatrix(int[,] matrix)
+bool IsSquareMatrix(int[,] matrix) // из bool метода возвращается либо (true) либо (false) 
 {
-  return matrix.GetLength(0) == matrix.GetLength(1);
+  return matrix.GetLength(0) == matrix.GetLength(1); // проверяем матрицу на равенство строк и столбцов
 }
 
 int[,] ReplacementMatrix(int[,] matrix)
-{
-  int[,] tempMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
-  for (int i = 0; i < matrix.GetLength(0); i++)
+{ // реализовали с помощью дополнительного массива new int[matrix.GetLength(0), matrix.GetLength(1)
+  int[,] tempMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)]; // с размером соответствующей матрицы 
+  for (int i = 0; i < matrix.GetLength(0); i++) // при помощи двойной итерации строки i 
   {
-    for (int j = 0; j < matrix.GetLength(1); j++)
+    for (int j = 0; j < matrix.GetLength(1); j++) // и столбцы j
     {
-      tempMatrix[j, i] = matrix[i, j];
+      tempMatrix[j, i] = matrix[i, j]; // индексы поменяли местами [j, i]
     }
   }
-  return tempMatrix;
-}
+  return tempMatrix; // вернули новый массив и передали в качестве 
+}                    // параметра в метод печати PrintMatrix(ReplacementMatrix(matrixGenerate));
 
 
 void PrintMatrix(int[,] matrix)
