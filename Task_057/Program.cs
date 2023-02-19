@@ -5,53 +5,45 @@
 информацию о том, сколько раз встречается элемент
 входных данных.*/
 
-void IncorrectValue()
+int[,] FillMatrixRnd(int rows, int columns, int min, int max)
 {
-  Console.WriteLine("Введено некорректное значение.");
-  Environment.Exit(0);
-}
-int UserInput()
-{
-  if (!int.TryParse(Console.ReadLine(), out int temp)) IncorrectValue();
-  return temp;
-}
-int[,] MatrixCreate(int rows, int columns, int min, int max)
-{
-  int[,] array = new int[rows, columns];
   Random rnd = new Random();
+  int[,] matrix = new int[rows, columns];
   for (int i = 0; i < rows; i++)
   {
     for (int j = 0; j < columns; j++)
     {
-      array[i, j] = rnd.Next(min, max + 1);
+      matrix[i, j] = rnd.Next(min, max + 10);
     }
   }
-  return array;
+  return matrix;
 }
-void PrintMatrix(int[,] array)
+void PrintMatrixRnd(int[,] matrix)
 {
-  for (int i = 0; i < array.GetLength(0); i++)
+  for (int i = 0; i < matrix.GetLength(0); i++)
   {
     Console.Write("[");
-    for (int j = 0; j < array.GetLength(1); j++)
+    for (int j = 0; j < matrix.GetLength(1); j++)
     {
-      if (j < array.GetLength(1) - 1)
-        Console.Write($"{array[i, j],4} |");
-      else Console.WriteLine($"{array[i, j],4}]");
+      if (j < matrix.GetLength(1) - 1) Console.Write($"{matrix[i, j],3} | ");
+      else Console.Write($"{matrix[i, j],3} ");
     }
+    Console.WriteLine("]");
   }
 }
-int[] AllNumbersArray(int[,] array2D)
+
+int[] AllNambersArray(int[,] array2D) // Переводим двумерный массив в одномерный int[,] -> int[]
 {
-  int arraySize = array2D.GetLength(0) * array2D.GetLength(1);
-  int[] array = new int[arraySize];
-  int count = 0;
+
+  int arraySize = array2D.Length;   // показывает общее количество элементов в массиве array2D.Length;
+  int[] array = new int[arraySize]; // создаем двумерный массив
+  int count = 0;                    // объявляем счетчик для одномерного массива
   for (int i = 0; i < array2D.GetLength(0); i++)
   {
     for (int j = 0; j < array2D.GetLength(1); j++)
     {
-      array[count] = array2D[i, j];
-      count++;
+      array[count] = array2D[i, j]; // каждому элементу массива array[count] 
+      count++;                      // присваиваем значение элемента двумерного массива arrya2D[i, j]
     }
   }
   return array;
@@ -60,47 +52,38 @@ void PrintArray(int[] array)
 {
   for (int i = 0; i < array.Length; i++)
   {
-    if (i < array.Length - 1)
-      Console.Write($"{array[i]}; ");
-    else Console.WriteLine($"{array[i]}.");
+    Console.Write($"{array[i]}, ");
   }
 }
 void FrequencyDictionary(int[] array)
 {
-  int count = 1;
+  int i = 0;
+  int count = 1; // одно число уже записали 
   int num = array[0];
-  for (int i = 1; i < array.Length; i++)
+  for (i = 1; i < array.Length; i++) // начинаем с превого индекса, так как первый уже записан
   {
     if (array[i] == num)
       count++;
     else
     {
-      Console.WriteLine($"Число {num} встречается {count}");
-      num = array[i];
-      count = 1;
+      Console.WriteLine($"Число {num} встречается {count} раз.");
+      num = array[i]; // меняем на новую цифру в масиве
+      count = 1; // count обнуляем до единицы 
     }
   }
-  Console.WriteLine($"Число {num} встречается {count}");
+  Console.WriteLine($"Число {num} встречается {count} раз."); // для последнего цикла 
 }
-Console.Write("Введите кол-во строк в массиве: ");
-int rowsSize = UserInput();
-if (rowsSize <= 0) IncorrectValue();
-Console.Write("Введите кол-во столбцов в массиве: ");
-int columnsSize = UserInput();
-if (columnsSize <= 0) IncorrectValue();
-Console.Write("Введите левую границу диапазона чисел: ");
-int minValue = UserInput();
-Console.Write("Введите правую границу диапазона чисел: ");
-int maxValue = UserInput();
+int[,] matrix = FillMatrixRnd(4, 4, 1, 10);
+PrintMatrixRnd(matrix);
+int[] array = AllNambersArray(matrix);
+Console.WriteLine();
+PrintArray(array);
+Console.WriteLine();
+Array.Sort(array); // Сортировка одномерного массива и передача в метод -> void FrequencyDictionary(int[] array)
+Console.WriteLine();
+PrintArray(array);
+Console.WriteLine();
+Console.WriteLine();
+FrequencyDictionary(array);
 
-int[,] matrix = MatrixCreate(rowsSize, columnsSize, minValue, maxValue);
-Console.WriteLine("Заданный массив:");
-PrintMatrix(matrix);
-
-int[] allNumberArray = AllNumbersArray(matrix);
-Console.WriteLine("Все числа:");
-Array.Sort(allNumberArray);
-PrintArray(allNumberArray);
-
-FrequencyDictionary(allNumberArray);
 
