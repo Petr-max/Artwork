@@ -1,4 +1,5 @@
 ﻿/*Задача 60.
+
 ...Сформируйте трёхмерный массив из неповторяющихся 
 двузначных чисел. Напишите программу, которая будет 
 построчно выводить массив, добавляя индексы каждого элемента.
@@ -30,7 +31,6 @@ int[,,] FillMultidimensionalArray(int x, int y, int z, int min, int max)
   }
   return matrix3D;
 }
-
 void PrintMatrixRnd3D(int[,,] matrix3D)
 {
   for (int i = 0; i < matrix3D.GetLength(0); i++)
