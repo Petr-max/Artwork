@@ -4,20 +4,21 @@
 которая поменяет местами первую и последнюю строку
 массива.*/
 
-int[,] matrix = CreateMatrixRndInt(4, 5, 0, 255);
-PrintMatrix(matrix);
+int[,] matrix = CreateMatrixRndInt(4, 5, 0, 255); // Генерируем массив
+PrintMatrix(matrix);                              // Распечатываем массив
 Console.WriteLine();
-ReplacemenMatrix(matrix);
-PrintMatrix(matrix);
+ReplacemenMatrix(matrix); // переворачиваем и вызываем новый сгенерированный массив
+PrintMatrix(matrix);      // Вывод нового массива 
 
-void ReplacemenMatrix(int[,] matrixMassIn)
+void ReplacemenMatrix(int[,] matrixMassIn) // Создали метод который меняет строки
 {
-  int temp;
-  for (int i = 0; i < matrixMassIn.GetLength(1); i++)
-  {
-    temp = matrixMassIn[0, i];
-    matrixMassIn[0, i] = matrixMassIn[matrixMassIn.GetLength(0) - 1, i];
-    matrixMassIn[matrixMassIn.GetLength(0) - 1, i] = temp;
+  for (int i = 0; i < matrixMassIn.GetLength(1); i++) // количество итераций ровно количеству столбцов
+  { // в переменную temp записываем нулевой строке значение i сторбца. если не надо переменную использовать дальше то,
+    int temp = matrixMassIn[0, i]; // Объявляем переменную котрая создается в цикле ближе к ее использованию 
+    matrixMassIn[0, i] = matrixMassIn[matrixMassIn.GetLength(0) - 1, i]; // в ячейку matrixMassIn[0, i]
+    // записываем новое значение элемента строки i столбца matrixMassIn[matrixMassIn.GetLength(0) - 1, i] 
+    matrixMassIn[matrixMassIn.GetLength(0) - 1, i] = temp; // Ячейку matrixMassIn[matrixMassIn.GetLength(0) - 1, i]
+    // записываем в переменную temp в 17 строку и итерация продолжается. 
   }
 }
 void PrintMatrix(int[,] matrix)
