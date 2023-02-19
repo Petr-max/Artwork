@@ -15,55 +15,47 @@
 // 4 2 4
 // 2 6 7
 
-void IncorrectValue()
+int[,] FillMatrixRnd(int rows, int columns, int min, int max)
 {
-  Console.WriteLine("Введено некорректное значение.");
-  Environment.Exit(0);
-}
-int UserInput()
-{
-  if (!int.TryParse(Console.ReadLine(), out int temp)) IncorrectValue();
-  return temp;
-}
-int[,] MatrixCreate(int rows, int columns, int min, int max)
-{
-  int[,] array = new int[rows, columns];
   Random rnd = new Random();
+  int[,] matrix = new int[rows, columns];
   for (int i = 0; i < rows; i++)
   {
     for (int j = 0; j < columns; j++)
     {
-      array[i, j] = rnd.Next(min, max + 1);
+      matrix[i, j] = rnd.Next(min, max);
     }
   }
-  return array;
+  return matrix;
 }
-void PrintMatrix(int[,] array)
+void PrintMatrixRnd3D(int[,] matrix)
 {
-  for (int i = 0; i < array.GetLength(0); i++)
+  for (int i = 0; i < matrix.GetLength(0); i++)
   {
     Console.Write("[");
-    for (int j = 0; j < array.GetLength(1); j++)
+    for (int j = 0; j < matrix.GetLength(1); j++)
     {
-      if (j < array.GetLength(1) - 1)
-        Console.Write($"{array[i, j],4} |");
-      else Console.WriteLine($"{array[i, j],4}]");
+      if (j < matrix.GetLength(1) - 1) Console.Write($"{matrix[i, j],3} | ");
+      else Console.Write($"{matrix[i, j],3} ");
     }
+    Console.WriteLine("]");
   }
 }
-int[] MatrixMinElemIndex(int[,] array2D)
+
+int[] IndexMinNumber(int[,] matrix) // метод нахождения минимального элемента в массиве
 {
-  int[] result = new int[2];
-  int min = array2D[0, 0];
-  for (int i = 0; i < array2D.GetLength(0); i++)
+  int minNum = matrix[0, 0];
+  int[] result = new int[3];
+  for (int i = 0; i < matrix.GetLength(0); i++)
   {
-    for (int j = 0; j < array2D.GetLength(1); j++)
+    for (int j = 0; j < matrix.GetLength(1); j++)
     {
-      if (array2D[i, j] < min)
+      if (minNum > matrix[i, j])
       {
-        min = array2D[i, j];
-        result[0] = i;
-        result[1] = j;
+        minNum = matrix[i, j];
+        result[0] = minNum;
+        result[1] = i;
+        result[2] = j;
       }
     }
   }
@@ -73,50 +65,52 @@ void PrintArray(int[] array)
 {
   for (int i = 0; i < array.Length; i++)
   {
-    if (i < array.Length - 1)
-      Console.Write($"{array[i]}; ");
-    else Console.WriteLine($"{array[i]}.");
+    Console.Write($"{array[i]}, ");
   }
 }
-int[,] DeleteMinRowsColumns(int[,] array2D, int[] array)
+int[,] DelRow(int[,] array, int row)
 {
-  int rowsCount = array2D.GetLength(0) - 1;
-  int columnsCount = array2D.GetLength(1) - 1;
-  int[,] resultMatrix = new int[rowsCount, columnsCount];
-  int m = 0;
-  for (int i = 0; i < rowsCount; i++)
+  int[,] result = new int[array.GetLength(0) - 1, array.GetLength(1)];
+  int x = 0;
+  for (int i = 0; i < array.GetLength(0); i++)
   {
-    if (m == array[0]) m++;
-    int n = 0;
-    for (int j = 0; j < columnsCount; j++)
+    if (i == row)
     {
-      if (n == array[1]) n++;
-      resultMatrix[i, j] = array2D[m, n];
-      n++;
+      row = -1;
+      continue;
     }
-    m++;
+
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+      result[x, j] = array[i, j];
+    }
+    x++;
   }
-  return resultMatrix;
+  return result;
 }
-Console.Write("Введите кол-во строк в массиве: ");
-int rowsSize = UserInput();
-if (rowsSize <= 0) IncorrectValue();
-Console.Write("Введите кол-во столбцов в массиве: ");
-int columnsSize = UserInput();
-if (columnsSize <= 0) IncorrectValue();
-Console.Write("Введите левую границу диапазона чисел: ");
-int minValue = UserInput();
-Console.Write("Введите правую границу диапазона чисел: ");
-int maxValue = UserInput();
-
-int[,] matrix = MatrixCreate(rowsSize, columnsSize, minValue, maxValue);
+int[,] DelCol(int[,] array, int col)
+{
+  int[,] result = new int[array.GetLength(0), array.GetLength(1) - 1];
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    int x = 0;
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+      if (j == col) continue;
+      result[i, x] = array[i, j];
+      x++;
+    }
+  }
+  return result;
+}
 Console.WriteLine("Заданный массив:");
-PrintMatrix(matrix);
-
-int[] indexArray = MatrixMinElemIndex(matrix);
-Console.Write("Индекс минимального элемента: ");
-PrintArray(indexArray);
-
-int[,] answerMatrix = DeleteMinRowsColumns(matrix, indexArray);
+int[,] matrix = FillMatrixRnd(3, 4, 1, 10);
+PrintMatrixRnd3D(matrix);
+Console.Write("Индекс минимального элемента -> ");
+int[] num = IndexMinNumber(matrix);
+PrintArray(num);
+int[,] matrixNoRow = DelRow(matrix, num[1]);
+int[,] matrixNoCol = DelCol(matrixNoRow, num[2]);
+Console.WriteLine();
+PrintMatrixRnd3D(matrixNoCol);
 Console.WriteLine("Результирующий массив:");
-PrintMatrix(answerMatrix);
